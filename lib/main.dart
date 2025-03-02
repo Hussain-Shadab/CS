@@ -1,4 +1,5 @@
 import 'package:coffee_shop/provider/bottom_navigation_provider.dart';
+import 'package:coffee_shop/provider/drop_down_button_provider.dart';
 import 'package:coffee_shop/provider/increment-provider.dart';
 import 'package:coffee_shop/utils/routes/routes.dart';
 import 'package:coffee_shop/utils/routes/routes_name.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(providers: [
       ChangeNotifierProvider(create: (_)=>CoffeProvider()),
       ChangeNotifierProvider(create: (_)=>BottomNavigationProvider()),
+      ChangeNotifierProvider(create: (_)=> DropDownButtonProvider()),
     ],
     child:  ScreenUtilInit(
       designSize: Size(360, 690),

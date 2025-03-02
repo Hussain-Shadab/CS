@@ -138,7 +138,9 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Consumer<CoffeProvider>(
                             builder: (context, provider, child) {
+                              print('run');
                           return TabButtonsCoffee(
+
                             imagePath: AppImages.flatWhite,
                             titleText: 'Flat White',
                             subTitle: 'Expresso',
@@ -146,6 +148,7 @@ class HomeScreen extends StatelessWidget {
                           );
                         }),
                         Consumer<CoffeProvider>(
+
                             builder: (context, provider, child) {
                           return TabButtonsCoffee(
                             imagePath: AppImages.mochaFusi,
