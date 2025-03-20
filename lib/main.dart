@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 
       builder : (context ,child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: RoutesName.homeScreen,
+        initialRoute: RoutesName.itemDetailScreen,
         onGenerateRoute: Routes.generateRoute,
 
       ),

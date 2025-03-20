@@ -1,5 +1,6 @@
 import 'package:coffee_shop/utils/routes/routes_name.dart';
 import 'package:coffee_shop/view/home_screen.dart';
+import 'package:coffee_shop/view/item_detail_screen.dart';
 import 'package:coffee_shop/view/splash_onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class Routes {
             ));
       case RoutesName.splashOnbording:
         return MaterialPageRoute(builder: (BuildContext context) => const SplashOnboardingScreen());
+      case RoutesName.itemDetailScreen:
+        return MaterialPageRoute(builder: (BuildContext context) => const ItemDetailScreen());
 
       default:
 

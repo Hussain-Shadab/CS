@@ -20,8 +20,10 @@ class CustomButton extends StatelessWidget {
   final double? width;
   final Alignment? alignment;
   final Align ? align;
+  final Widget ? child;
   const CustomButton(
       {Key? key,
+        this.child,
         this.iconData,
         this.iconColor,
        this.text,
@@ -52,25 +54,32 @@ class CustomButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: height ?? h ,
-        width: width ?? w ,
+        height: height ?? h,
+        width: width ?? w,
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryColor,
           borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(10)),
         ),
         child: Center(
-
-          child:text != null ? Text(
-            text!,
-            style: TextStyle(
-
-              fontSize: fontSize ?? 16, // Default font size
-              fontWeight:
-                  fontWeight ?? FontWeight.bold, // Default font weight
-            ),
-          ): (iconData != null ? Icon(iconData,size: fontSize ?? 24,color: textColor ?? AppColors.whiteColor,):SizedBox()),
+          child: child ??
+              (text != null
+                  ? Text(
+                text!,
+                style: TextStyle(
+                  fontSize: fontSize ?? 16, // Default font size
+                  fontWeight: fontWeight ?? FontWeight.bold, // Default font weight
+                ),
+              )
+                  : (iconData != null
+                  ? Icon(
+                iconData,
+                size: fontSize ?? 24,
+                color: textColor ?? AppColors.whiteColor,
+              )
+                  : SizedBox())),
         ),
       ),
     );
+
   }
 }
