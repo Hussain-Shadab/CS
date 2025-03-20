@@ -4,7 +4,6 @@ import 'package:coffee_shop/provider/increment-provider.dart';
 import 'package:coffee_shop/provider/tab_buttons_provider.dart';
 import 'package:coffee_shop/utils/routes/routes.dart';
 import 'package:coffee_shop/utils/routes/routes_name.dart';
-import 'package:coffee_shop/view/splash_onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
