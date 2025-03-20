@@ -1,6 +1,7 @@
 import 'package:coffee_shop/logics/tab_buttons_logic.dart';
 import 'package:coffee_shop/provider/bottom_navigation_provider.dart';
 import 'package:coffee_shop/provider/increment-provider.dart';
+import 'package:coffee_shop/provider/tab_buttons_provider.dart';
 import 'package:coffee_shop/resources/component/custom_button.dart';
 import 'package:coffee_shop/resources/component/custom_text.dart';
 import 'package:coffee_shop/resources/component/drop_down_button.dart';
@@ -14,26 +15,44 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatelessWidget {
   final String imgPath;
   final String imgtext;
-   HomeScreen({Key? key, required this.imgPath, required this.imgtext})
+
+  HomeScreen({Key? key, required this.imgPath, required this.imgtext})
       : super(key: key);
 
-  final List<Widget> _pages =[
+  final List<Widget> _pages = [
     Text('0'),
     Text('1'),
     Text('4'),
     Text('5'),
   ];
+
   @override
   Widget build(BuildContext context) {
-    final bottomNavigationProvider = Provider.of<BottomNavigationProvider>(context);
+    final bottomNavigationProvider =
+        Provider.of<BottomNavigationProvider>(context);
 
     final TextEditingController searchController = TextEditingController();
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    final coffeProvider = Provider.of<CoffeeProvider>(context);
+    final tabProvider = Provider.of<TabButtonsProvider>(context);
+    List<Map<String, dynamic>> filteredCoffee =
+        coffeProvider.coffeeItems.where((coffee) {
+      String selectedCategory = [
+        'All Coffee',
+        'Machiato',
+        'Latte',
+        'Latte Special'
+      ][tabProvider.selectedIndex];
+      bool isMatch = selectedCategory == 'All Coffee' ||
+          coffee['category'] == selectedCategory;
+      print("Item: ${coffee['title']}, Category: ${coffee['category']}, Match: $isMatch");
+      return isMatch;
+    }).toList();
     return Scaffold(
-      body: Column(
-        children: [
-          Stack(
+        body: Stack(children: [
+          Column(
             children: [
               Container(
                 height: height * 0.35,
@@ -114,121 +133,154 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                  width: 350.w,
-                  top: 250.h,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 27.0, right: 20),
-                    child: Image.asset('assets/banner1.png'),
-                  ))
-            ],
-          ),
-          Expanded(
-            child: Container(
-              color: AppColors.greyColor.withOpacity(0.09),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: [
-                    SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: TabButtonsLogic()),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+              SizedBox(
+                height: 60.h,
+              ),
+              Expanded(
+                child: Container(
+                  color: AppColors.greyColor.withOpacity(0.09),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
                       children: [
+                        SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: TabButtonsLogic()),
                         Consumer<CoffeProvider>(
-                            builder: (context, provider, child) {
-                              print('run');
-                          return TabButtonsCoffee(
+                          builder: (context, provider, child) {
+                            List<Map<String, dynamic>> filteredCoffee =
+                                coffeProvider.coffeeItems.where((coffee) {
+                              String selectedCategory = [
+                                'All Coffee',
+                                'Machiato',
+                                'Latte',
+                                'Latte Special'
+                              ][tabProvider.selectedIndex];
+                              return selectedCategory == 'All Coffee' ||
+                                  coffee['category'] == selectedCategory;
+                            }).toList();
 
-                            imagePath: AppImages.flatWhite,
-                            titleText: 'Flat White',
-                            subTitle: 'Expresso',
-                            rateText: provider.price.toString(),
-                          );
-                        }),
-                        Consumer<CoffeProvider>(
-
-                            builder: (context, provider, child) {
-                          return TabButtonsCoffee(
-                            imagePath: AppImages.mochaFusi,
-                            titleText: 'Mocha Fusi',
-                            subTitle: 'Ice/Hot',
-                            rateText: provider.price1.toString(),
-                          );
-                        })
+                            return Column(
+                              children: filteredCoffee.map((coffee) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  child: TabButtonsCoffee(
+                                    imagePath: getCoffeeImage(coffee['title']),
+                                    titleText: coffee['title'],
+                                    subTitle: coffee['subTitle'],
+                                    rateText: coffee['price'].toString(),
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        )
                       ],
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Consumer<CoffeProvider>(
-                            builder: (context, provider, child) {
-                          return TabButtonsCoffee(
-                            imagePath: AppImages.coffeeMachao,
-                            titleText: 'Coffee Mocha',
-                            subTitle: 'Deep Foam',
-                            rateText: provider.price2.toString(),
-                          );
-                        }),
-                        Consumer<CoffeProvider>(
-                            builder: (context, provider, child) {
-                          return TabButtonsCoffee(
-                            imagePath: AppImages.coffePana,
-                            titleText: 'Coffee Pana',
-                            subTitle: 'Ice/Hot',
-                            rateText: provider.price3.toString(),
-                          );
-                        }),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    )
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
-        ],
-      ),
-      // _pages[bottomNavigationProvider.selectedIndex], // Selected page display karein
-      bottomNavigationBar: Consumer<BottomNavigationProvider>(
-        builder: (context,provider,child){
-          return BottomNavigationBar(
-            selectedItemColor: AppColors.primaryColor,
-            unselectedItemColor: AppColors.greyColor,
-            currentIndex: bottomNavigationProvider.selectedIndex, // Selected index highlight karein
-            onTap: (index){
-              bottomNavigationProvider.updateIndex(index);
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.shopping_cart),
-                label: 'Cart',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Profile',
-              ),
             ],
-          );
-        },
-      )
-    );
+          ),
+          Positioned(
+              width: 360.w,
+              top: 180.h,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.r),
+                    child: Container(
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.circular(10.r),
+                        // ),
+                        child: Stack(
+                      children: [
+                        Image.asset(
+                          AppImages.banner,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned(
+                            left: 30,
+                            top: 20,
+                            child: Container(
+                              height: 26.h,
+                              width: 60.w,
+                              decoration: BoxDecoration(
+                                  color: AppColors.promoColor,
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              child: Center(
+                                child: CustomText(
+                                  text: 'Promo',
+                                  style: TextStyle(
+                                      color: AppColors.whiteColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14.sp),
+                                ),
+                              ),
+                            )),
+                        // SizedBox(height: 40),
+
+                        Positioned(
+                            left: 30,
+                            top: 70,
+                            child: Image.asset(AppImages.getFree))
+                      ],
+                    ))),
+              )),
+        ]),
+        // _pages[bottomNavigationProvider.selectedIndex], // Selected page display karein
+        bottomNavigationBar: Consumer<BottomNavigationProvider>(
+          builder: (context, provider, child) {
+            return BottomNavigationBar(
+              selectedItemColor: AppColors.primaryColor,
+              unselectedItemColor: AppColors.greyColor,
+              currentIndex: bottomNavigationProvider.selectedIndex,
+              // Selected index highlight karein
+              onTap: (index) {
+                bottomNavigationProvider.updateIndex(index);
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  label: 'Search',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart),
+                  label: 'Cart',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                  label: 'Profile',
+                ),
+              ],
+            );
+          },
+        ));
   }
-}
+
+  String getCoffeeImage(String title) {
+    switch (title) {
+      case 'Flat White':
+        return AppImages.flatWhite;
+      case 'Mocha Fusi':
+        return AppImages.mochaFusi;
+      case 'Coffee Machao':
+        return AppImages.coffeeMachao;
+      case 'Coffee Pana':
+        return AppImages.coffePana;
+
+      default:
+        return AppImages.mochaFusi; // Fallback image
+    }
+  }
 //
 // class BottomNavigationBarExample extends StatefulWidget {
 //   @override
@@ -274,3 +326,4 @@ class HomeScreen extends StatelessWidget {
 //     );
 //   }
 // }
+}

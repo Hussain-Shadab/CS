@@ -1,6 +1,7 @@
 import 'package:coffee_shop/provider/bottom_navigation_provider.dart';
 import 'package:coffee_shop/provider/drop_down_button_provider.dart';
 import 'package:coffee_shop/provider/increment-provider.dart';
+import 'package:coffee_shop/provider/tab_buttons_provider.dart';
 import 'package:coffee_shop/utils/routes/routes.dart';
 import 'package:coffee_shop/utils/routes/routes_name.dart';
 import 'package:coffee_shop/view/splash_onboarding_screen.dart';
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
       ChangeNotifierProvider(create: (_)=>CoffeProvider()),
       ChangeNotifierProvider(create: (_)=>BottomNavigationProvider()),
       ChangeNotifierProvider(create: (_)=> DropDownButtonProvider()),
+      ChangeNotifierProvider(create: (_)=> TabButtonsProvider()),
+      ChangeNotifierProvider(create: (_) =>CoffeeProvider()),
     ],
     child:  ScreenUtilInit(
       designSize: Size(360, 690),

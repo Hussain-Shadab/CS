@@ -31,7 +31,7 @@ class _TabButtonsCoffeeState extends State<TabButtonsCoffee> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(10.r),
       height: 260.h,
       width: 150.w,
       decoration: BoxDecoration(
@@ -42,14 +42,40 @@ class _TabButtonsCoffeeState extends State<TabButtonsCoffee> {
         // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            height: 155.h,
-            width: 160.w,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(0.r)),
-            child: Image.asset(
-              widget.imagePath ?? '',
-              fit: BoxFit.fill,
-            ),
+          Stack(
+alignment: Alignment.topRight,
+            children:[
+              Container(
+                height: 155.h,
+                width: 160.w,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(0.r)),
+                child: Image.asset(
+                  widget.imagePath ?? '',
+                  fit: BoxFit.fill,
+                ),
+              ),
+              Positioned(
+                
+                  child: Container(
+                height: 27.h,
+                width: 55.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(14.r),
+                      bottomLeft: Radius.circular(20.r),
+                        
+                      ),
+                      color: AppColors.blackColor.withOpacity(0.2)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.star,color: AppColors.ratingStarColor,size: 18.r,),
+                        SizedBox(width: 5.w,),
+                        CustomText(text: '4.2',style: TextStyle(fontSize: 15.sp,color: AppColors.whiteColor,fontWeight: FontWeight.w600),)
+                      ],
+                    ),
+              )),
+            ],
           ),
           SizedBox(height: 5.h,),
           CustomText(

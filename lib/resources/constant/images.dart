@@ -13,4 +13,8 @@ class AppImages{
   static const coffePana = 'assets/coffeeImages/coffepana.png';
 
   static const coffeeMachao = 'assets/coffeeImages/coffemachao.png';
+
+  static const banner = 'assets/banner1.png';
+
+  static const getFree = 'assets/getFree.png';
 }
