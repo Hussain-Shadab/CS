@@ -29,7 +29,7 @@ class CustomText extends StatelessWidget {
   const CustomText({
     Key? key,
     required this.text,
-    this.subTitle,
+    this. subTitle,
     this.style,
     this.textAlign,
     this.maxLines,
