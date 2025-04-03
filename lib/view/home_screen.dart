@@ -97,12 +97,12 @@ class HomeScreen extends StatelessWidget {
                                     prefixIcon: Icon(
                                       Icons.search_sharp,
                                       color: AppColors.greyColor,
-                                      size: 30.sm,
+                                      size: 30.spMin,
                                     ),
                                     hintText: 'Search Coffee',
                                     hintStyle: TextStyle(
                                         color: AppColors.greyColor,
-                                        fontSize: 15.sm),
+                                        fontSize: 15.spMin),
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 16, vertical: 12)),
@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            width: 20.sm,
+                            width: 20.w,
                           ),
                           Expanded(
                             flex: 1,
@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                               height: height * .07,
                               width: width * .1,
                               iconData: Icons.tune_outlined,
-                              fontSize: 30.sm,
+                              fontSize: 30.spMin,
                             ),
                           )
                         ],
