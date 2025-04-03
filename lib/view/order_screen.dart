@@ -203,7 +203,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
               ],
             ),
-            SizedBox(height: 50,),
+
             IncrementDecrement()
           ],
         ),
