@@ -1,5 +1,7 @@
 
 import 'package:coffee_shop/resources/component/custom_button.dart';
+import 'package:coffee_shop/resources/component/tab_buttons_coffee.dart';
+import 'package:coffee_shop/resources/constant/images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -134,14 +136,75 @@ class _OrderScreenState extends State<OrderScreen> {
             ),
             ),
             SizedBox(height: 8.h,),
-            CustomButton(
-              height: 26.h,
-              width: 120.w,
-              backgroundColor: AppColors.whiteColor,
+            Row(
+              children: [
+                CustomButton(
+                  height: 26.h,
+                  width: 120.w,
+                  backgroundColor: AppColors.whiteColor,
+                  borderRadius: BorderRadius.circular(15.r),
+                  border: Border.all(width: 1.5,color: AppColors.bgColor1st.withOpacity(0.5)),
 
-              icon: Icon(Icons.edit,size: 14.dm,),
+                  iconData: Icons.edit,
+                iconColor: AppColors.bgColor1st,
+                text: 'Edit Address',
+                  textColor: AppColors.bgColor1st,
+                ),
+                SizedBox(width: 10.w,),
+                CustomButton(
+                  height: 26.h,
+                  width: 120.w,
+                  backgroundColor: AppColors.whiteColor,
+                  borderRadius: BorderRadius.circular(15.r),
+                  border: Border.all(width: 1.5,color: AppColors.bgColor1st.withOpacity(0.5)),
+                  iconData: Icons.note_add_outlined,
+                  iconColor: AppColors.bgColor1st,
+                  text: 'Add Note',
+                  textColor: AppColors.bgColor1st,
+                ),
+              ],
+            ),SizedBox(height: 10.h,),
+            Divider(
+              indent: 13,
+              endIndent: 13,
             ),
+            SizedBox(height: 10.h,),
+            Row(
 
+              children: [
+                Container(
+                  width: 54.w,
+                  height: 54.h,
+                  
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Image.asset(
+                      AppImages.coffePana,
+                      fit: BoxFit.cover,
+                    
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8.w,),
+                Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CustomText(text: 'text',style: TextStyle(
+                      color: AppColors.titleTextColor,
+                    fontSize: 20.sp,fontWeight: FontWeight.w600,
+                    ),),
+                    CustomText(text: 'text',style: TextStyle(
+                      color: AppColors.subTitleTextColor,
+                      fontSize: 16.sp,fontWeight: FontWeight.w600,
+                    ),),
+                  ],
+                ),
+
+
+              ],
+            ),
+            SizedBox(height: 50,),
+            IncrementDecrement()
           ],
         ),
       ),

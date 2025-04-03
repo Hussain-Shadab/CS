@@ -19,12 +19,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key, required this.imgPath, required this.imgtext})
       : super(key: key);
 
-  final List<Widget> _pages = [
-    Text('0'),
-    Text('1'),
-    Text('4'),
-    Text('5'),
-  ];
+
 
   @override
   Widget build(BuildContext context) {

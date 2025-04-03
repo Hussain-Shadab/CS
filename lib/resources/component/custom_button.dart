@@ -21,6 +21,8 @@ class CustomButton extends StatelessWidget {
   final Alignment? alignment;
   final Align ? align;
   final Widget ? child;
+  final Border ? border;
+  final Color ? borderColor;
   const CustomButton(
       {Key? key,
         this.child,
@@ -42,7 +44,8 @@ class CustomButton extends StatelessWidget {
       this.width,
       this.alignment,
         this.align,
-
+        this.border,
+        this.borderColor,
       })
       : super(key: key);
 
@@ -59,27 +62,35 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryColor,
           borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(10)),
+          border: border ?? Border.all()
         ),
         child: Center(
-          child: child ??
-              (text != null
-                  ? Text(
-                text!,
-                style: TextStyle(
-                  fontSize: fontSize ?? 16, // Default font size
-                  fontWeight: fontWeight ?? FontWeight.bold, // Default font weight
+          child: Row(
+            mainAxisSize: MainAxisSize.min, // To keep content centered
+            children: [
+              if (iconData != null) ...[
+                Icon(
+                  iconData,
+                  size: fontSize ?? 24,
+                  color: iconColor ?? AppColors.whiteColor,
                 ),
-              )
-                  : (iconData != null
-                  ? Icon(
-                iconData,
-                size: fontSize ?? 24,
-                color: textColor ?? AppColors.whiteColor,
-              )
-                  : SizedBox())),
+                SizedBox(width: 6), // Space between icon & text
+              ],
+              if (text != null)
+                Text(
+                  text!,
+                  style: TextStyle(
+                    fontSize: fontSize ?? 16,
+                    fontWeight: fontWeight ?? FontWeight.bold,
+                    color: textColor ?? AppColors.whiteColor,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
+
 
   }
 }
