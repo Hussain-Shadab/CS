@@ -137,11 +137,13 @@ class _IncrementDecrementState extends State<IncrementDecrement> {
     final coffee=Provider.of<CoffeProvider>(context,listen: true);
     return Row(
       children: [
+        // SizedBox(width: 10,),
         CustomButton(
 
-        padding: EdgeInsets.all(5.r),
-          height: 20.h,
-          width: 20.w,
+        // padding: EdgeInsets.all(5.r),
+          height: 29.h,
+          width: 29.w,
+          borderRadius: BorderRadius.circular(20.r),
           onTap: (){
           coffee.decrement().toString();
 
@@ -161,9 +163,10 @@ class _IncrementDecrementState extends State<IncrementDecrement> {
         SizedBox(width: 2.w,),
         CustomButton(
           padding: EdgeInsets.all(5.r),
-          height: 20.h,
-          width: 20.w,
+          height: 28.h,
+          width: 28.w,
           fontSize: 14,
+          borderRadius: BorderRadius.circular(20.r),
           onTap: (){
             coffee.increment().toString();
             // setState(() {

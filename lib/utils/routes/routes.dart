@@ -1,4 +1,5 @@
 import 'package:coffee_shop/utils/routes/routes_name.dart';
+import 'package:coffee_shop/view/delivery_screen.dart';
 import 'package:coffee_shop/view/home_screen.dart';
 import 'package:coffee_shop/view/item_detail_screen.dart';
 import 'package:coffee_shop/view/order_screen.dart';
@@ -24,6 +25,9 @@ class Routes {
 
       case RoutesName.orderScreen:
         return MaterialPageRoute(builder: (BuildContext context) => const OrderScreen());
+
+      case RoutesName.deliveryScreen:
+        return MaterialPageRoute(builder: (BuildContext context) => DeliveryScreen());
 
       default:
 

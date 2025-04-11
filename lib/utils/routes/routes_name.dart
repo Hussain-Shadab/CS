@@ -10,4 +10,6 @@ class RoutesName {
   static const String itemDetailScreen = 'Item Detail Screen';
 
   static const String orderScreen = 'OrderScreen';
+  
+  static const String deliveryScreen = 'DeliveryScreen';
 }

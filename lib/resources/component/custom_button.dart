@@ -1,5 +1,6 @@
 import 'package:coffee_shop/resources/constant/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
   final IconData? iconData;
@@ -62,19 +63,22 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColors.primaryColor,
           borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(10)),
-          border: border ?? Border.all()
+          border: border ?? Border.all(),
+
         ),
+        alignment: alignment ?? Alignment.centerLeft,
         child: Center(
           child: Row(
             mainAxisSize: MainAxisSize.min, // To keep content centered
             children: [
+
               if (iconData != null) ...[
                 Icon(
                   iconData,
                   size: fontSize ?? 24,
                   color: iconColor ?? AppColors.whiteColor,
                 ),
-                SizedBox(width: 6), // Space between icon & text
+                SizedBox(width: 6.w), // Space between icon & text
               ],
               if (text != null)
                 Text(
@@ -85,7 +89,7 @@ class CustomButton extends StatelessWidget {
                     color: textColor ?? AppColors.whiteColor,
                   ),
                 ),
-            ],
+              ],
           ),
         ),
       ),
